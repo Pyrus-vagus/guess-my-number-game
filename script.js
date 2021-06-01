@@ -1,7 +1,8 @@
 "use strict";
-const secretNumber = Math.floor(Math.random() * (21 - 1)) + 1;
+let secretNumber = Math.floor(Math.random() * (21 - 1)) + 1;
 let score = 20;
 const highScore = [];
+
 const checkHandler = function () {
   console.log("Hello");
   const guess = Number(document.querySelector(".guess").value);
@@ -15,8 +16,8 @@ const checkHandler = function () {
     // when player wins
     message.textContent = "Woo,correct number";
     randomNumber.textContent = secretNumber;
-    score += 10;
-    scoreBlock.textContent = score;
+    document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
   } else {
     if (score <= 0) {
       // when player loses
@@ -29,4 +30,18 @@ const checkHandler = function () {
     }
   }
 };
+const againHandler = function () {
+  const guess = Number(document.querySelector(".guess").value);
+  const message = document.querySelector(".message");
+  const randomNumber = document.querySelector(".number");
+  const scoreBlock = document.querySelector(".score");
+  message.textContent = "Start guessing...";
+  secretNumber = Math.floor(Math.random() * (21 - 1)) + 1;
+  randomNumber.textContent = "?";
+  score = 20;
+  scoreBlock.textContent = score;
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".number").style.width = "15rem";
+};
 document.querySelector(".check").addEventListener("click", checkHandler);
+document.querySelector(".again").addEventListener("click", againHandler);
